@@ -20,6 +20,7 @@ ossn_register_callback('ossn', 'init', function () {
 					return $return;
 		});	
 		if(ossn_isLoggedin()){
+				ossn_add_hook('required', 'components', 'dashboard_gadgets_asure_requirements');
 				ossn_register_page('dashboard', 'dashboard_page_handler');
 				ossn_register_menu_item('newsfeed', array(
 						'name'   => 'dashboard',
@@ -29,6 +30,15 @@ ossn_register_callback('ossn', 'init', function () {
 				));			
 		}
 });
+/**
+ * Make user Gadgets component not get disabled
+ *
+ * @return array
+ */
+function dashboard_gadgets_asure_requirements($hook, $type, $return, $params): array {
+		$return[] = 'Gadgets';
+		return $return;
+}
 /**
  * Dashboard page handler
  *
